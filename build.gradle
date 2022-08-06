@@ -1,0 +1,119 @@
+plugins {
+    id "maven-publish"
+    id "com.jfrog.artifactory" version "$artifactoryVersion"
+    id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
+    id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
+    id "com.github.johnrengelman.shadow" version "$shadowVersion"
+}
+
+group "gg.tropic.duels"
+version "$duelsVersion"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    maven {
+        name "Scala"
+        url "${property("artifactory_contextUrl")}/gradle-release"
+
+        credentials {
+            username property("artifactory_user")
+            password property("artifactory_password")
+        }
+    }
+
+    maven { url "https://desolve.io/repository" }
+    maven { url "https://jitpack.io" }
+
+    maven { url "https://repo.dmulloy2.net/repository/public/" }
+    maven { url "https://ci.athion.net/job/FastAsyncWorldEdit/ws/mvn/" }
+    maven { url "https://papermc.io/repo/repository/maven-public/" }
+}
+
+dependencies {
+    compileOnly "xyz.xenondevs:particle:1.7.1"
+    compileOnly "io.papermc:paperlib:1.0.7"
+
+    compileOnly "gg.scala.commons:bukkit:$commonsVersion"
+    kapt "me.lucko:helper:$helperVersion"
+
+    compileOnly "com.solexgames:Grape:1.0.0"
+    compileOnly "com.solexgames:shop:1.0-SNAPSHOT"
+    compileOnly "com.solexgames.challenges:bar-challenges:1.0-SNAPSHOT"
+
+    compileOnly fileTree("lib")
+    compileOnly "gg.scala.spigot:server:$serverVersion"
+
+    compileOnly "gg.scala.lemon:bukkit:$lemonVersion"
+    compileOnly "gg.scala.cgs:parties:$partiesVersion"
+    compileOnly "gg.scala.peach:peach:$peachVersion"
+    compileOnly "gg.scala.cookie:Cookie:$cookieVersion"
+    compileOnly "gg.scala.cloudsync:spigot:$cloudVersion"
+
+    compileOnly "com.comphenix.protocol:ProtocolLib:$protocolLibVersion"
+    compileOnly "com.github.LunarClient:BukkitAPI:$lunarClientVersion"
+
+    compileOnly "gg.scala.store:spigot:$storeVersion"
+    compileOnly "gg.scala.store:shared:$storeVersion"
+}
+
+compileJava {
+    options.compilerArgs += ["-parameters"]
+
+    options.fork = true
+    options.encoding = "UTF-8"
+}
+
+compileKotlin {
+    kotlinOptions.javaParameters = true
+    kotlinOptions.jvmTarget = "17"
+}
+
+shadowJar {
+    archiveClassifier.set("")
+
+    exclude "**/*.kotlin_metadata"
+    exclude "**/*.kotlin_builtins"
+    exclude "META-INF/"
+
+    archiveFileName = "duels.jar"
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
+
+    repositories {
+        maven {
+            name "Scala"
+            url "${property("artifactory_contextUrl")}/gradle-release"
+
+            credentials {
+                username property("artifactory_user")
+                password property("artifactory_password")
+            }
+        }
+    }
+}
+
+artifactory {
+    this.contextUrl = property("artifactory_contextUrl")
+
+    publish {
+        repository {
+            repoKey = property("artifactory_release_local")
+            username = property("artifactory_user")
+            password = property("artifactory_password")
+            maven = true
+        }
+    }
+}
+
+tasks.build.dependsOn(
+    shadowJar,
+    publishShadowPublicationToScalaRepository
+)
