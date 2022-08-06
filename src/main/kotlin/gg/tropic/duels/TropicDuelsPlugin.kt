@@ -14,7 +14,8 @@ import me.lucko.helper.plugin.ap.PluginDependency
     depends = [
         PluginDependency("Lemon"),
         PluginDependency("scala-commons"),
-        PluginDependency("store-spigot")
+        PluginDependency("store-spigot"),
+        PluginDependency("cloudsync", soft = true),
     ]
 )
 class TropicDuelsPlugin : ExtendedScalaPlugin()
