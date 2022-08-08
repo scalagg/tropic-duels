@@ -24,9 +24,9 @@ class SpawnService
         val config = plugin.config<SpawnConfig>()
 
         Events.subscribe(PlayerJoinEvent::class.java)
-            .handler {
-                it.player.sendMessage("Welcome to Tropic Practice")
-                it.player.teleport(config.spawnLocation)
+            .handler { event ->
+                config.welcomeMessage.forEach { event.player.sendMessage(it) }
+                event.player.teleport(config.spawnLocation)
             }
             .bindWith(plugin)
     }

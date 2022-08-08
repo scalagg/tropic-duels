@@ -43,8 +43,6 @@ class TropicDuelsPlugin : ExtendedScalaPlugin()
         {
             this.dataFolder.mkdirs()
         }
-
-        VisibilityHandler.registerAdapter("duels-adapter", DuelsVisibilityAdapter)
     }
 
     @ContainerDisable
