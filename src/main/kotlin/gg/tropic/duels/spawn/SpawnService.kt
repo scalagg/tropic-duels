@@ -19,7 +19,7 @@ object SpawnService
 {
 
     @Inject
-    private lateinit var plugin: TropicDuelsPlugin
+    lateinit var plugin: TropicDuelsPlugin
 
     lateinit var hotbar: HotbarPreset
 
@@ -36,7 +36,11 @@ object SpawnService
         Events.subscribe(PlayerJoinEvent::class.java)
             .handler { event ->
                 config.welcomeMessage.forEach { event.player.sendMessage(it) }
-                event.player.teleport(config.spawnLocation)
+
+                if (config.spawnLocation == null)
+                {
+                    event.player.teleport(config.spawnLocation)
+                }
             }
             .bindWith(plugin)
     }

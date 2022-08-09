@@ -14,7 +14,7 @@ import org.bukkit.entity.Player
  * @since 8/8/2022
  */
 @AutoRegister
-class SetSpawnCommand : ScalaCommand()
+object SetSpawnCommand : ScalaCommand()
 {
 
     @CommandAlias("setspawn")

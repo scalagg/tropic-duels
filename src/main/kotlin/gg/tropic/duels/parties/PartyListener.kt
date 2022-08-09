@@ -7,13 +7,14 @@ import gg.scala.parties.event.PartyLeaveEvent
 import net.evilblock.cubed.visibility.VisibilityHandler
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 
 /**
  * @author AgentRKID
  * @since 8/8/2022
  */
 @Listeners
-class PartyListener
+class PartyListener : Listener
 {
     @EventHandler
     fun onPartyJoin(event: PartyJoinEvent)

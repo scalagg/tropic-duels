@@ -2,6 +2,7 @@ package gg.tropic.duels.spawn.editor
 
 import gg.tropic.duels.TropicDuelsPlugin
 import gg.tropic.duels.spawn.SpawnConfig
+import gg.tropic.duels.spawn.menu.SpawnManagementMenu
 import net.evilblock.cubed.menu.menus.TextEditorMenu
 import org.bukkit.entity.Player
 
@@ -23,7 +24,7 @@ class EditWelcomeMessageMenu(welcomeMessage: MutableList<String>) : TextEditorMe
 
     override fun onClose(player: Player)
     {
-        TODO("Create Spawn configuration menu for other spawn stuff")
+        SpawnManagementMenu().openMenu(player)
     }
 
 }

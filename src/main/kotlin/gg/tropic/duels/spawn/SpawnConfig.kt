@@ -12,7 +12,7 @@ class SpawnConfig
 {
 
     @Comment("The set spawn location")
-    lateinit var spawnLocation: Location
+    var spawnLocation: Location? = null
 
     @Comment("The welcome message to appear to players on login")
     var welcomeMessage = mutableListOf(
