@@ -3,7 +3,10 @@ package gg.tropic.duels.spawn
 import gg.scala.flavor.inject.Inject
 import gg.scala.flavor.service.Configure
 import gg.scala.flavor.service.Service
+import gg.scala.lemon.hotbar.HotbarPreset
+import gg.scala.lemon.hotbar.HotbarPresetHandler
 import gg.tropic.duels.TropicDuelsPlugin
+import io.papermc.lib.PaperLib
 import me.lucko.helper.Events
 import org.bukkit.event.player.PlayerJoinEvent
 
@@ -12,16 +15,23 @@ import org.bukkit.event.player.PlayerJoinEvent
  * @since 8/6/2022
  */
 @Service
-class SpawnService
+object SpawnService
 {
 
     @Inject
-    lateinit var plugin: TropicDuelsPlugin
+    private lateinit var plugin: TropicDuelsPlugin
+
+    lateinit var hotbar: HotbarPreset
 
     @Configure
     fun configure()
     {
         val config = plugin.config<SpawnConfig>()
+
+        // TODO: Build hotbar setup
+        hotbar = HotbarPreset()
+
+        HotbarPresetHandler.startTrackingHotbar("spawn", hotbar)
 
         Events.subscribe(PlayerJoinEvent::class.java)
             .handler { event ->

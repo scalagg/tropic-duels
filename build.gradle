@@ -33,7 +33,6 @@ repositories {
 }
 
 dependencies {
-    compileOnly "xyz.xenondevs:particle:1.7.1"
     compileOnly "io.papermc:paperlib:1.0.7"
 
     compileOnly "gg.scala.commons:bukkit:$commonsVersion"

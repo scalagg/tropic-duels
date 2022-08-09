@@ -15,7 +15,7 @@ class SpawnConfig
     lateinit var spawnLocation: Location
 
     @Comment("The welcome message to appear to players on login")
-    var welcomeMessage: ArrayList<String> = arrayListOf(
+    var welcomeMessage = mutableListOf(
         "",
         "${CC.B_PRI} WELCOME TO NA PRACTICE!",
         "${CC.I_GRAY} Click a sword to start fighting...",
