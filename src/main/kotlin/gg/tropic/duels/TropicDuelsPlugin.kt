@@ -30,19 +30,15 @@ import net.evilblock.cubed.visibility.VisibilityHandler
 )
 class TropicDuelsPlugin : ExtendedScalaPlugin()
 {
-
     companion object
     {
         @JvmStatic
         val instance by Plugins.plugin<TropicDuelsPlugin>()
     }
+
     @ContainerEnable
     fun containerEnable()
     {
-        if (!this.dataFolder.exists())
-        {
-            this.dataFolder.mkdirs()
-        }
     }
 
     @ContainerDisable
