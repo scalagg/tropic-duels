@@ -19,7 +19,7 @@ class DuelsVisibilityAdapter : VisibilityAdapter
         val party = PartyService.findPartyByUniqueId(toRefresh)
 
         if (party != null) {
-            if (party.members.containsKey(refreshFor.uniqueId)) {
+            if (party.includedMembers().contains(refreshFor.uniqueId)) {
                 return VisibilityAction.NEUTRAL
             }
         }
