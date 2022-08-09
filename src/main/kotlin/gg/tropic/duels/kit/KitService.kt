@@ -1,12 +1,11 @@
 package gg.tropic.duels.kit
 
-import gg.scala.flavor.service.Close
 import gg.scala.flavor.service.Configure
 import gg.scala.flavor.service.Service
 import gg.scala.store.controller.DataStoreObjectController
 import gg.scala.store.controller.DataStoreObjectControllerCache
 import gg.scala.store.storage.type.DataStoreStorageType
-import java.util.UUID
+import java.util.*
 
 /**
  * @author AgentRKID
@@ -23,7 +22,10 @@ object KitService
     fun configure()
     {
         controller = DataStoreObjectControllerCache.create()
-        kits = controller.loadAll(DataStoreStorageType.MONGO).get();
+
+        kits = controller
+            .loadAll(DataStoreStorageType.MONGO)
+            .join()
     }
 
 }

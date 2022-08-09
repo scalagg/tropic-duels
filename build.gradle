@@ -1,5 +1,6 @@
 plugins {
     id "maven-publish"
+    id "io.freefair.lombok" version "5.3.0"
     id "com.jfrog.artifactory" version "$artifactoryVersion"
     id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
     id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
@@ -51,6 +52,9 @@ dependencies {
     compileOnly "gg.scala.cookie:Cookie:$cookieVersion"
     compileOnly "gg.scala.cloudsync:spigot:$cloudVersion"
 
+    compileOnly "org.projectlombok:lombok:1.18.24"
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+
     compileOnly "com.comphenix.protocol:ProtocolLib:$protocolLibVersion"
     compileOnly "com.github.LunarClient:BukkitAPI:$lunarClientVersion"
 
@@ -58,16 +62,13 @@ dependencies {
     compileOnly "gg.scala.store:shared:$storeVersion"
 }
 
-compileJava {
-    options.compilerArgs += ["-parameters"]
-
-    options.fork = true
-    options.encoding = "UTF-8"
+kapt {
+    keepJavacAnnotationProcessors = true
 }
 
 compileKotlin {
     kotlinOptions.javaParameters = true
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "11"
 }
 
 shadowJar {
