@@ -39,6 +39,7 @@ class TropicDuelsPlugin : ExtendedScalaPlugin()
     @ContainerEnable
     fun containerEnable()
     {
+
     }
 
     @ContainerDisable

@@ -1,4 +1,4 @@
-package gg.tropic.duels.spawn.editor
+package gg.tropic.duels.spawn.menu.editor
 
 import gg.tropic.duels.TropicDuelsPlugin
 import gg.tropic.duels.spawn.SpawnConfig

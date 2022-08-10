@@ -2,7 +2,7 @@ package gg.tropic.duels.spawn.menu
 
 import gg.tropic.duels.TropicDuelsPlugin
 import gg.tropic.duels.spawn.SpawnConfig
-import gg.tropic.duels.spawn.editor.EditWelcomeMessageMenu
+import gg.tropic.duels.spawn.menu.editor.EditWelcomeMessageMenu
 import gg.tropic.duels.system.menu.SystemManagementMenu
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.Menu

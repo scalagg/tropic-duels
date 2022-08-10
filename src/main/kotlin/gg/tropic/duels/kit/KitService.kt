@@ -18,6 +18,7 @@ object KitService
 {
 
     lateinit var controller: DataStoreObjectController<Kit>
+
     lateinit var kits: MutableMap<UUID, Kit>
 
     @Configure
@@ -27,6 +28,13 @@ object KitService
         kits = controller.loadAll(DataStoreStorageType.MONGO)
             .join()
             .toMutableMap()
+    }
+
+    fun findKitByName(name: String): Kit?
+    {
+        return kits.values.firstOrNull {
+            it.name.equals(name, ignoreCase = true)
+        }
     }
 
 }
